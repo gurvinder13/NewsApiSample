@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_news_details.*
 class NewsDetailsFragment : Fragment(R.layout.fragment_news_details), DetailsNewsAdapter.ClickListener {
     lateinit var viewModel: NewsViewModel
     private val args: NewsDetailsFragmentArgs by navArgs()
-    lateinit var newsAdapter: DetailsNewsAdapter
+    private lateinit var newsAdapter: DetailsNewsAdapter
     private val TAG = "NewsDetailsFragment"
 
 
