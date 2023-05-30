@@ -93,7 +93,7 @@ class BookmarkNewsFragment : Fragment(R.layout.fragment_bookmark_news), ItemClic
         ad.setButton(Dialog.BUTTON_POSITIVE, getString(R.string.ok)
         ) { _, _ ->
             viewModel.deleteArticle(article)
-            Snackbar.make(requireView(), getString(R.string.scessfully_deleted_bookmark), Snackbar.LENGTH_SHORT)
+            Snackbar.make(requireView(), getString(R.string.successfully_deleted_bookmark), Snackbar.LENGTH_SHORT)
                 .show()
         }
         ad.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.cancel)) { dialog, _ ->
