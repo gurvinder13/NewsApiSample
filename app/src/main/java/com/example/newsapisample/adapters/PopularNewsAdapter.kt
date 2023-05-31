@@ -11,6 +11,7 @@ import com.example.newsapisample.Listener.ItemClickListener
 import com.example.newsapisample.models.Article
 import com.example.newsapisample.utils.Constants.Companion.HOME_NEWS
 import com.example.newsapisample.R
+import com.example.newsapisample.utils.Constants.Companion.CONSTANT_1
 import kotlinx.android.synthetic.main.items_popular_news_layout.view.*
 
 
@@ -43,7 +44,7 @@ class PopularNewsAdapter(type: String, private val clickListener: ItemClickListe
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = differ.currentList[position + 1]
+        val article = differ.currentList[position + CONSTANT_1]
 
         holder.itemView.apply {
             if (newType == HOME_NEWS) {
@@ -67,6 +68,6 @@ class PopularNewsAdapter(type: String, private val clickListener: ItemClickListe
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size - 1
+        return differ.currentList.size - CONSTANT_1
     }
 }

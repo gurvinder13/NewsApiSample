@@ -9,35 +9,35 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapisample.Listener.ItemClickListener
+import com.example.newsapisample.R
 import com.example.newsapisample.adapters.PopularNewsAdapter
 import com.example.newsapisample.adapters.TopNewsAdapter
 import com.example.newsapisample.models.Article
-import com.example.newsapisample.ui.NewsActivity
 import com.example.newsapisample.ui.NewsViewModel
+import com.example.newsapisample.utils.Constants.Companion.CONSTANT_0
 import com.example.newsapisample.utils.Constants.Companion.HOME_NEWS
 import com.example.newsapisample.utils.Constants.Companion.QUERY_PAGE_SIZE
 import com.example.newsapisample.utils.Resource
-import com.example.newsapisample.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home_news.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeNewsFragment : Fragment(R.layout.fragment_home_news),
     ItemClickListener, TopNewsAdapter.ClickListener {
+    private val viewModel by viewModel<NewsViewModel>()
 
-    lateinit var viewModel: NewsViewModel
     private lateinit var popularNewsAdapter: PopularNewsAdapter
     private lateinit var topNewsAdapter: TopNewsAdapter
     private var list = ArrayList<Article>()
     private lateinit var article: Article
-    private var bookmarkPosition: Int = 0
+    private var bookmarkPosition: Int = CONSTANT_0
 
 
     private val TAG = "HomeNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView2()
 
         iv_bookmark.setOnClickListener {
@@ -73,7 +73,7 @@ class HomeNewsFragment : Fragment(R.layout.fragment_home_news),
                         val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 2
                         isLastPage = viewModel.breakingNewsPage == totalPages
                         if (isLastPage) {
-                            rvBreakingNews2.setPadding(0, 0, 0, 0)
+                            rvBreakingNews2.setPadding(CONSTANT_0, CONSTANT_0, CONSTANT_0, CONSTANT_0)
                         }
                     }
                 }
@@ -123,7 +123,7 @@ class HomeNewsFragment : Fragment(R.layout.fragment_home_news),
 
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
-            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isNotAtBeginning = firstVisibleItemPosition >= CONSTANT_0
             val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
             val shouldPaginate =
                 isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling

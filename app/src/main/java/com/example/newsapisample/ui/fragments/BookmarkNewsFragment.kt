@@ -14,23 +14,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapisample.Listener.ItemClickListener
+import com.example.newsapisample.R
 import com.example.newsapisample.adapters.PopularNewsAdapter
 import com.example.newsapisample.models.Article
-import com.example.newsapisample.ui.NewsActivity
 import com.example.newsapisample.ui.NewsViewModel
 import com.example.newsapisample.utils.Constants.Companion.BOOKMARK_NEWS
-import com.example.newsapisample.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_bookmark_news.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookmarkNewsFragment : Fragment(R.layout.fragment_bookmark_news), ItemClickListener {
 
-    private lateinit var viewModel: NewsViewModel
     private lateinit var popularNewsAdapter: PopularNewsAdapter
+    private val viewModel by viewModel<NewsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
 
         setupRecyclerView()
         iv_back.setOnClickListener {

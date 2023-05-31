@@ -6,33 +6,31 @@ import android.view.View
 import android.widget.AbsListView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapisample.Listener.ItemClickListener
-import kotlinx.android.synthetic.main.fragment_search_news.*
-import kotlinx.android.synthetic.main.fragment_search_news.paginationProgressBar
-import kotlinx.coroutines.*
+import com.example.newsapisample.R
 import com.example.newsapisample.adapters.PopularNewsAdapter
 import com.example.newsapisample.models.Article
-import com.example.newsapisample.ui.NewsActivity
 import com.example.newsapisample.ui.NewsViewModel
 import com.example.newsapisample.utils.Constants
+import com.example.newsapisample.utils.Constants.Companion.CONSTANT_0
 import com.example.newsapisample.utils.Resource
-import com.example.newsapisample.R
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_search_news.*
+import kotlinx.coroutines.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news), ItemClickListener {
 
-    lateinit var viewModel: NewsViewModel
     private lateinit var popularNewsAdapter: PopularNewsAdapter
+    private val viewModel by viewModel<NewsViewModel>()
 
     private val TAG = "SearchNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
 
         setupRecyclerView()
         iv_back.setOnClickListener {
@@ -60,7 +58,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), ItemClickLis
                         val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
                         isLastPage = viewModel.searchNewsPage == totalPages
                         if (isLastPage) {
-                            rvSearchNews.setPadding(0, 0, 0, 0)
+                            rvSearchNews.setPadding(CONSTANT_0, CONSTANT_0, CONSTANT_0, CONSTANT_0)
                         }
                     }
                 }
@@ -110,7 +108,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news), ItemClickLis
 
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
-            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isNotAtBeginning = firstVisibleItemPosition >= CONSTANT_0
             val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
             val shouldPaginate =
                 isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling

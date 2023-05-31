@@ -9,7 +9,7 @@ import com.example.newsapisample.models.Article
 
 @Database(
     entities = [Article::class],
-    version = 1
+    version = 1,exportSchema = false
 )
 
 @TypeConverters(Converters::class)
@@ -17,6 +17,7 @@ abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao
 
+/*
     companion object {
         @Volatile
         private var instance: ArticleDatabase? = null
@@ -33,4 +34,5 @@ abstract class ArticleDatabase : RoomDatabase() {
                 "article_db.db"
             ).build()
     }
+*/
 }
